@@ -12,7 +12,7 @@ const ArticlesTab = () => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'red'
+        backgroundColor: '#fff'
     }
 })
 
