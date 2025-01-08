@@ -3,16 +3,30 @@ import React, { useState } from "react";
 import Header from "@/components/Header/Header";
 import { useRouter } from "expo-router";
 
-const App = () => {
-    const router = useRouter();
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-    const [isHomeView, SetIsHomeView] = useState(true);
+import { API_URL, API_KEY } from "@env";
+
+const App = () => {
+  const router = useRouter();
+
+  const [isHomeView, SetIsHomeView] = useState(true);
+
+  const client = new ApolloClient({
+    uri: API_URL,
+    headers: {
+      'x-hasura-admin-secret': API_KEY,
+    },
+    cache: new InMemoryCache(),
+  });
 
   return (
-    <View style={{ flex: 1 }}>
-    <Header isHomeView={isHomeView} />
-    <Text onPress={() => router.push("/articles-list")}>fgewffwewre</Text>
-  </View>
+    <ApolloProvider client={client}>
+      <View style={{ flex: 1 }}>
+        <Header isHomeView={isHomeView} />
+        <Text onPress={() => router.push("/articles-list")}>fgewffwewre</Text>
+      </View>
+    </ApolloProvider>
   );
 };
 
