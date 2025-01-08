@@ -11,8 +11,8 @@ import { GET_ARTICLES } from "@/services/queries";
 
 const Articles = () => {
 
-    const { loading, error, data } = useQuery(GET_ARTICLES);
-    console.log(data);
+    // const { loading, error, data } = useQuery(GET_ARTICLES);
+  
     
 
   return (

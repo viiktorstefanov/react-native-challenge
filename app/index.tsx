@@ -1,33 +1,38 @@
-import { View, Text, StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import React, { useState } from "react";
-import Header from "@/components/Header/Header";
+import { View, Text, StyleSheet, SafeAreaView, StatusBar } from "react-native";
+import { useQuery } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
+import client from '@/services/apolloClient'; 
+import Header from "@/components/Header/Header"; 
 import { useRouter } from "expo-router";
-
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-
-import { API_URL, API_KEY } from "@env";
+import { GET_ARTICLES } from "@/services/queries";
 
 const App = () => {
+  const [isHomeView, SetIsHomeView] = useState(true);
+  const { loading, error, data } = useQuery(GET_ARTICLES);
+
   const router = useRouter();
 
-  const [isHomeView, SetIsHomeView] = useState(true);
+  if (loading) return <Text>Loading articles...</Text>;
+  if (error) return <Text>Error: {error.message}</Text>;
 
-  const client = new ApolloClient({
-    uri: API_URL,
-    headers: {
-      'x-hasura-admin-secret': API_KEY,
-    },
-    cache: new InMemoryCache(),
-  });
+  console.log(data);
+  
 
   return (
+    <View style={{ flex: 1 }}>
+      <Header isHomeView={isHomeView} />
+      <Text onPress={() => router.push("/articles-list")}>fgewffwewre</Text>
+    </View>
+  );
+};
+
+const ApolloApp = () => {
+  return (
     <ApolloProvider client={client}>
-      <View style={{ flex: 1 }}>
-        <Header isHomeView={isHomeView} />
-        <Text onPress={() => router.push("/articles-list")}>fgewffwewre</Text>
-      </View>
+      <App />
     </ApolloProvider>
   );
 };
 
-export default App;
+export default ApolloApp;

@@ -1,11 +1,13 @@
 import { gql } from '@apollo/client';
 
 export const GET_ARTICLES = gql`
-  query GetArticles {
+  query {
     articles {
       id
       title
+      image_url
       body
+      published_at
     }
   }
 `;
