@@ -8,6 +8,7 @@ export const GET_ARTICLES = gql`
       image_url
       body
       published_at
+      slug
     }
   }
 `;
