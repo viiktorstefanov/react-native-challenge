@@ -1,5 +1,6 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
+import { dateFormat } from "@/utils/dateFormat";
 
 type ArticleProps = {
   id: string;
@@ -22,6 +23,7 @@ const Article: React.FC<ArticleProps> = ({
     <View style={styles.articleItem}>
       <Image source={{ uri: imageUrl }} style={styles.articleImage} />
       <Text style={styles.articleTitle}>{title}</Text>
+      <Text>{dateFormat(publishedAt)}</Text>
       <TouchableOpacity>
         <Text style={styles.readMoreText}>Read More</Text>
       </TouchableOpacity>
