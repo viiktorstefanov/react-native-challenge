@@ -11,7 +11,7 @@ const App = () => {
   return (
     <View style={{ flex: 1 }}>
     <Header isHomeView={isHomeView} />
-    <Text onPress={() => router.push("/article")}>fgewffwewre</Text>
+    <Text onPress={() => router.push("/articles-list")}>fgewffwewre</Text>
   </View>
   );
 };
