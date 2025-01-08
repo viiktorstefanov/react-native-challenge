@@ -1,14 +1,17 @@
 import { View, Text, StyleSheet, SafeAreaView, StatusBar } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Header from "@/components/Header/Header";
-import colors from "@/constants/Colors";
+import { useRouter } from "expo-router";
 
 const App = () => {
+    const router = useRouter();
+
+    const [isHomeView, SetIsHomeView] = useState(true);
+
   return (
     <View style={{ flex: 1 }}>
-    <StatusBar translucent backgroundColor={colors.primary} barStyle="light-content" />
-    <Header />
-    <Text>fgewffwewre</Text>
+    <Header isHomeView={isHomeView} />
+    <Text onPress={() => router.push("/article")}>fgewffwewre</Text>
   </View>
   );
 };
