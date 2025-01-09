@@ -1,5 +1,6 @@
 {
   "name": "tyk-tam-challenge",
+  "author": { "name": "Viktor Stefanov"},
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {

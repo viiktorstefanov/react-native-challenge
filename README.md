@@ -1,50 +1,76 @@
-# Welcome to your Expo app 👋
+# React Native Challenge
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a React Native project built with Expo CLI.
 
-## Get started
+## Requirements
 
-1. Install dependencies
+Make sure you have the following installed on your system:
 
-   ```bash
-   npm install
-   ```
+- [Node.js](https://nodejs.org/)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/) (Optional but recommended)
+- [Android Studio](https://developer.android.com/studio) 
+- [Xcode](https://developer.apple.com/xcode/) (for iOS)
 
-2. Start the app
 
-   ```bash
+## Setup
+
+To get started with the project:
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/viiktorstefanov/react-native-challenge.git
+    ```
+
+2. Navigate to the project directory:
+    ```bash
+    cd react-native-challenge
+    ```
+
+3. Install dependencies:
+
+      ```bash
+      npm install
+      ```
+
+## Running the Project
+
+To run the app, use Expo CLI:
+
+1. **Start the development server**:
+    ```bash
     npx expo start
-   ```
+    ```
 
-In the output, you'll find options to open the app in a
+    If you have problems with opening the application with your phone in Expo Go , try run the project with:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+    ```bash
+    npx expo start --tunnel
+    ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+2. **Open the app on a device or simulator**:
+   - Scan the QR code with the Expo Go app on your mobile device (available on iOS and Android).
+   - Alternatively, you can use a simulator like Virtual Device Manager from [Android Studio](https://developer.android.com/studio).
 
-## Get a fresh project
+### Build Instructions
 
-When you're ready, run:
+Build app with EAS Build.
+To create a production build, you can use the following commands:
 
-```bash
-npm run reset-project
-```
+1. **For Android**:
+    To create an APK or AAB for Android:
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+     ```bash
+     eas login
+     ```
 
-## Learn more
+    To configure an Android for EAS Build, run the following command:
 
-To learn more about developing your project with Expo, look at the following resources:
+     ```bash
+     eas build:configure
+     ```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+    ```bash
+    eas build --platform android
+    ```
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+     After the build completes, you will be able to download the APK or AAB to install on a device or upload to the Play Store.
