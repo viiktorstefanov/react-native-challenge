@@ -82,13 +82,12 @@ const ArticleDetails = () => {
         style={styles.staticBox}
       >
         <CircleButton
-          onHoverColor="red"
           onPress={() => {
             setIsAddedToFavourite((prev) => !prev);
           }}
         >
           {isAddedToFavourite ? (
-            <FontAwesome name="star" size={24} color={"#F7C600"} />
+            <FontAwesome name="star" size={24} color={colors.starButton} />
           ) : (
             <Ionicons name="star-outline" size={24} color={colors.primary} />
           )}
@@ -100,7 +99,7 @@ const ArticleDetails = () => {
           onPress={() => {}}
         />
 
-        <CircleButton onHoverColor="red" onPress={onShare}>
+        <CircleButton onPress={onShare}>
           <Feather name="share" size={24} color={colors.primary} />
         </CircleButton>
       </LinearGradient>

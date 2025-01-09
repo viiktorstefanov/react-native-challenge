@@ -4,6 +4,7 @@ import { dateFormat } from "@/utils/dateFormat";
 import colors from "@/constants/Colors";
 import { RelativePathString, useRouter } from "expo-router";
 import { useFonts } from "expo-font";
+import Entypo from '@expo/vector-icons/Entypo';
 
 type ArticleProps = {
   id: string;
@@ -56,7 +57,10 @@ const Article: React.FC<ArticleProps> = ({
         </View>
         <Image source={{ uri: imageUrl }} style={styles.articleImage} />
       </View>
-      <Text style={styles.date}>{dateFormat(publishedAt)}</Text>
+      <View style={styles.dateGroup}>
+        <Text style={styles.date}>{dateFormat(publishedAt)}</Text>
+        <Entypo name="dots-three-horizontal" size={18} color="black" />
+      </View>
       <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail">
         {body}
       </Text>
@@ -73,7 +77,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     width: 327,
     backgroundColor: colors.cardBackground,
-    gap: 10,
+    gap: 15,
   },
   firstCardRow: {
     flexDirection: "row",
@@ -121,12 +125,18 @@ const styles = StyleSheet.create({
   date: {
     color: colors.date,
     fontFamily: 'Inter',
+    width: 179,
   },
   description: {
     color: colors.primary,
     marginBottom: 10,
     fontFamily: 'Inter',
   },
+  dateGroup: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 10,
+  }
 });
 
 export default Article;

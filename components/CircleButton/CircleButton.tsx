@@ -3,13 +3,11 @@ import React from "react";
 
 
 type CircleButtonProps = {
-  onHoverColor: string;
   onPress?: () => void;
   children?: React.ReactNode;
 };
 
 const CircleButton: React.FC<CircleButtonProps> = ({
-  onHoverColor,
   onPress,
   children,
 }) => {
