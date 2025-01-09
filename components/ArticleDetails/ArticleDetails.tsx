@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     textAlign: "center",
     marginTop: 10,
-    paddingBottom: 20,
+    paddingBottom: 150,
   },
   staticBox: {
     width: width,
