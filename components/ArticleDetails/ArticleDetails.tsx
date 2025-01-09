@@ -1,13 +1,14 @@
 import {
-  View,
   Text,
   StyleSheet,
   StatusBar,
   Image,
   Dimensions,
   ScrollView,
+  Share,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import { ApolloProvider, useQuery } from "@apollo/client";
 import { GET_ARTICLE_BY_ID } from "@/services/queries";
@@ -19,11 +20,14 @@ import CircleButton from "../CircleButton/CircleButton";
 import colors from "@/constants/Colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import RegularButton from "../RegularButton/RegularButton";
 
 import { LinearGradient } from "expo-linear-gradient";
 
 const ArticleDetails = () => {
+  const [isAddedToFavourite, setIsAddedToFavourite] = useState(false);
+
   const { id } = useLocalSearchParams();
   const articleId = parseInt(id as string, 10);
 
@@ -43,7 +47,17 @@ const ArticleDetails = () => {
   }
 
   const article: Article = data.articles_by_pk;
-  
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: "Check out this awesome content!",
+      });
+    } catch (error) {
+      Alert.alert("Error");
+    }
+  };
+
   return (
     <>
       <ScrollView
@@ -67,8 +81,17 @@ const ArticleDetails = () => {
         colors={["transparent", "rgba(255, 255, 255, 0.8)"]}
         style={styles.staticBox}
       >
-        <CircleButton onHoverColor="red" onPress={() => {}}>
-          <Ionicons name="star-outline" size={24} color={colors.primary} />
+        <CircleButton
+          onHoverColor="red"
+          onPress={() => {
+            setIsAddedToFavourite((prev) => !prev);
+          }}
+        >
+          {isAddedToFavourite ? (
+            <FontAwesome name="star" size={24} color={"#F7C600"} />
+          ) : (
+            <Ionicons name="star-outline" size={24} color={colors.primary} />
+          )}
         </CircleButton>
 
         <RegularButton
@@ -77,7 +100,7 @@ const ArticleDetails = () => {
           onPress={() => {}}
         />
 
-        <CircleButton onHoverColor="red" onPress={() => {}}>
+        <CircleButton onHoverColor="red" onPress={onShare}>
           <Feather name="share" size={24} color={colors.primary} />
         </CircleButton>
       </LinearGradient>

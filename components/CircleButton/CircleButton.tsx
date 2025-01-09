@@ -1,9 +1,10 @@
 import { View, TouchableHighlight, StyleSheet } from "react-native";
 import React from "react";
 
+
 type CircleButtonProps = {
   onHoverColor: string;
-  onPress: () => void;
+  onPress?: () => void;
   children?: React.ReactNode;
 };
 
@@ -12,12 +13,18 @@ const CircleButton: React.FC<CircleButtonProps> = ({
   onPress,
   children,
 }) => {
+  
+  const onPressHandler = async () => {
+    if(onPress) {
+      onPress();
+    }
+  };
+  
   return (
     <View style={styles.container}>
       <TouchableHighlight
         style={styles.button}
-        onPress={onPress}
-        underlayColor={onHoverColor}
+        onPress={onPressHandler}
       >
         <View style={styles.content}>
           {children} 
