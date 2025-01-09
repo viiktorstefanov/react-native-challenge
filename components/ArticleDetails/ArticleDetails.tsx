@@ -1,15 +1,22 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React from 'react';
-import { useLocalSearchParams } from 'expo-router'; 
+import { View, Text, StyleSheet, StatusBar } from "react-native";
+import React from "react";
+import { useLocalSearchParams } from "expo-router";
 
 const ArticleDetails = () => {
   const { id } = useLocalSearchParams();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{id}</Text>
-      <Text style={styles.body}>test</Text>
-    </View>
+    <>
+      <StatusBar
+        translucent
+        barStyle={"dark-content"}
+        backgroundColor={"transparent"}
+      />
+      <View style={styles.container}>
+        <Text style={styles.title}>{id}</Text>
+        <Text style={styles.body}>test</Text>
+      </View>
+    </>
   );
 };
 
@@ -19,7 +26,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   body: {

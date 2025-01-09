@@ -1,12 +1,10 @@
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import colors from "@/constants/Colors"; 
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'react-native';
 
 const Header : React.FC = () => {
-
-    const [isHomeView, setIsHomeView] = useState(true);
 
   const [fontsLoaded] = useFonts({
     Inter: require('../../assets/fonts/Inter-Regular.ttf'),
@@ -17,16 +15,13 @@ const Header : React.FC = () => {
     return <Text>Loading...</Text>;
   }
 
-  const statusBarStyle = isHomeView  ? 'light-content' : 'dark-content';
-  const statusBarBackgroundColor = isHomeView ? colors.primary : 'transparent';
-
   return (
     <SafeAreaView style={styles.safeArea}>
 
       <StatusBar
         translucent
-        barStyle={statusBarStyle}
-        backgroundColor={statusBarBackgroundColor} 
+        barStyle={'light-content'}
+        backgroundColor={colors.primary} 
       />
       
       <View style={styles.header}>
