@@ -44,7 +44,7 @@ To run the app, use Expo CLI:
     If you have problems with opening the application with your phone in Expo Go , try run the project with:
 
     ```bash
-    npx expo start --tunnel
+    npm run tunnel
     ```
 
 2. **Open the app on a device or simulator**:
