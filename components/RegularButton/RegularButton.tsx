@@ -1,17 +1,31 @@
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import colors from '@/constants/Colors';
 
 type RegularButtonProps = {
   text: string;
-  onPress: () => void;
+  secondaryText: string;
+  onPress?: () => void;
 };
 
-const RegularButton: React.FC<RegularButtonProps> = ({ text, onPress }) => {
+const RegularButton: React.FC<RegularButtonProps> = ({ text, secondaryText, onPress }) => {
+
+  const [ backgroundColor, setBackgroundColor ] = useState(colors.primary);
+  const [ buttenText, setButtonText ] = useState(text);
+
+  const onPressHandler = () => {
+    setBackgroundColor(colors.button);
+    setButtonText(secondaryText);
+
+    if(onPress) {
+      onPress();
+    };
+  }
+
   return (
     <View style={styles.container}>
-      <TouchableHighlight style={styles.button} onPress={onPress} >
-        <Text style={styles.text}>{text}</Text>
+      <TouchableHighlight style={[styles.button, { backgroundColor }]} onPress={onPressHandler} >
+        <Text style={styles.text}>{buttenText}</Text>
       </TouchableHighlight>
     </View>
   );
@@ -24,7 +38,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: colors.primary,
     width: 168,
     height: 48,
     borderRadius: 100,
