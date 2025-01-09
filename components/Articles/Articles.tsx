@@ -21,7 +21,8 @@ const Articles: React.FC<ArticlesProps> = ({ articles }) => {
           imageUrl={item.image_url}
           body={item.body}
           publishedAt={item.published_at}
-          slug={item.slug}
+          categoryLabel={item.category.label}
+          categoryTitle={item.category.title}
         />
       )}
       contentContainerStyle={styles.contentContainer}

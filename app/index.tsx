@@ -10,7 +10,7 @@ import Articles from "@/components/Articles/Articles";
 const App = () => {
 
   const { loading, error, data } = useQuery(GET_ARTICLES);
-
+  
   if (loading) return <Text>Loading articles...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
 

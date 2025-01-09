@@ -11,7 +11,8 @@ type ArticleProps = {
   imageUrl: string;
   body: string;
   publishedAt: string;
-  slug: string;
+  categoryLabel: string;
+  categoryTitle: string;
 };
 
 const Article: React.FC<ArticleProps> = ({
@@ -20,11 +21,11 @@ const Article: React.FC<ArticleProps> = ({
   imageUrl,
   body,
   publishedAt,
-  slug,
-
+  categoryLabel,
+  categoryTitle
 }) => {
   const router = useRouter();
-
+  
   const handlePress = () => {
     router.push(`/article/${id}` as RelativePathString);
   };
@@ -42,8 +43,8 @@ const Article: React.FC<ArticleProps> = ({
       <View style={styles.firstCardRow}>
         <View style={styles.firstColumn}>
           <View style={styles.categoryGroup}>
-            <Text style={styles.categoryIcon}>UX</Text>
-            <Text style={styles.categoryField}>UX Design</Text>
+            <Text style={styles.categoryIcon}>{categoryLabel}</Text>
+            <Text style={styles.categoryField}>{categoryTitle}</Text>
           </View>
           <Text
             style={styles.articleTitle}

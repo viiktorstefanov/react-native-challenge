@@ -4,10 +4,8 @@ import {
   StyleSheet,
   StatusBar,
   Image,
-  SafeAreaView,
   Dimensions,
   ScrollView,
-  ActivityIndicator,
 } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
@@ -45,7 +43,7 @@ const ArticleDetails = () => {
   }
 
   const article: Article = data.articles_by_pk;
-
+  
   return (
     <>
       <ScrollView

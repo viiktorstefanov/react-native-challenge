@@ -4,5 +4,8 @@ export type Article = {
     image_url: string,
     body: string,
     published_at: string,
-    slug: string,
+    category: {
+        label: string,
+        title: string,
+    },
 };
