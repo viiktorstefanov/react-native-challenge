@@ -1,5 +1,5 @@
 export function dateFormat(dateString: string): string {
-    const date = new Date(dateString);
+    const date = new Date(dateString); 
     const now = new Date();
 
     const timeDifference = now.getTime() - date.getTime();
@@ -11,8 +11,10 @@ export function dateFormat(dateString: string): string {
 
     let timeAgoString = '';
 
-    if (days > 0) {
+    if (days > 1) {
         timeAgoString = `${days} day${days > 1 ? 's' : ''} ago`;
+    } else if (days === 1) {
+        timeAgoString = 'Yesterday';
     } else if (hours > 0) {
         timeAgoString = `${hours} hour${hours > 1 ? 's' : ''} ago`;
     } else if (minutes > 0) {

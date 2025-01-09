@@ -1,6 +1,9 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import { dateFormat } from "@/utils/dateFormat";
+import colors from "@/constants/Colors";
+import { RelativePathString, useRouter } from "expo-router";
+import { useFonts } from "expo-font";
 
 type ArticleProps = {
   id: string;
@@ -18,39 +21,111 @@ const Article: React.FC<ArticleProps> = ({
   body,
   publishedAt,
   slug,
+
 }) => {
+  const router = useRouter();
+
+  const handlePress = () => {
+    router.push(`/article/${id}` as RelativePathString);
+  };
+
+  const [fontsLoaded] = useFonts({
+    Inter: require("../../assets/fonts/Inter-Regular.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
-    <View style={styles.articleItem}>
-      <Image source={{ uri: imageUrl }} style={styles.articleImage} />
-      <Text style={styles.articleTitle}>{title}</Text>
-      <Text>{dateFormat(publishedAt)}</Text>
-      <TouchableOpacity>
-        <Text style={styles.readMoreText}>Read More</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity onPress={handlePress} style={styles.articleItem}>
+      <View style={styles.firstCardRow}>
+        <View style={styles.firstColumn}>
+          <View style={styles.categoryGroup}>
+            <Text style={styles.categoryIcon}>UX</Text>
+            <Text style={styles.categoryField}>UX Design</Text>
+          </View>
+          <Text
+            style={styles.articleTitle}
+            numberOfLines={3}
+            ellipsizeMode="tail"
+          >
+            {title}
+          </Text>
+        </View>
+        <Image source={{ uri: imageUrl }} style={styles.articleImage} />
+      </View>
+      <Text style={styles.date}>{dateFormat(publishedAt)}</Text>
+      <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail">
+        {body}
+      </Text>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-    articleItem: {
-      marginBottom: 20,
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: '#ddd',
-    },
-    articleImage: {
-      width: 100,
-      height: 100,
-      borderRadius: 10,
-    },
-    articleTitle: {
-      fontSize: 18,
-      fontWeight: 'bold',
-    },
-    readMoreText: {
-      color: 'blue',
-      marginTop: 5,
-    }
-  });
+  articleItem: {
+    marginBottom: 20,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#F6F8FFCC",
+    borderRadius: 16,
+    width: 327,
+    backgroundColor: colors.cardBackground,
+    gap: 10,
+  },
+  firstCardRow: {
+    flexDirection: "row",
+    gap: 20,
+  },
+  firstColumn: {
+    gap: 9,
+  },
+  categoryGroup: {
+    flexDirection: "row",
+    gap: 10,
+    alignItems: "center",
+  },
+  categoryIcon: {
+    backgroundColor: "red",
+    width: 24,
+    height: 24,
+    borderRadius: 50,
+    borderColor: "#EAECF4",
+    borderWidth: 1,
+    textAlign: "center",
+    verticalAlign: "middle",
+    color: "#fff",
+    fontSize: 11,
+    fontFamily: 'Inter',
+  },
+  categoryField: {
+    marginBottom: 5,
+    fontFamily: 'Inter',
+    color: '#000000',
+    fontSize: 14,
+  },
+  articleImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+  },
+  articleTitle: {
+    fontSize: 18,
+    color: '#000000',
+    width: 179,
+    fontWeight: "bold",
+    fontFamily: 'Inter',
+  },
+  date: {
+    color: colors.date,
+    fontFamily: 'Inter',
+  },
+  description: {
+    color: colors.primary,
+    marginBottom: 10,
+    fontFamily: 'Inter',
+  },
+});
 
 export default Article;

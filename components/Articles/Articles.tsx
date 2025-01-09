@@ -1,18 +1,6 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import React from "react";
-import CircleButton from "../CircleButton/CircleButton";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import Feather from "@expo/vector-icons/Feather";
 import colors from "@/constants/Colors";
-import RegularButton from "../RegularButton/RegularButton";
 import Article from "../Article/Article";
 import { Article as ArticleType } from "@/constants/Article";
 
@@ -23,6 +11,7 @@ type ArticlesProps = {
 const Articles: React.FC<ArticlesProps> = ({ articles }) => {
   return (
     <FlatList
+      style={styles.container}
       data={articles}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
@@ -35,22 +24,22 @@ const Articles: React.FC<ArticlesProps> = ({ articles }) => {
           slug={item.slug}
         />
       )}
+      contentContainerStyle={styles.contentContainer}
     />
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.background,
+    paddingTop: 20,
+    paddingLeft: 30,
+    paddingRight: 30,
+  },
+  contentContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
 export default Articles;
-
-{
-  /* <Text>Articles</Text> */
-}
-{
-  /* <CircleButton onHoverColor="red" onPress={() => {}}>
-        <Ionicons name="star-outline" size={24} color={colors.primary} />
-      </CircleButton>
-      <CircleButton onHoverColor="red" onPress={() => {}}>
-        <Feather name="share" size={24} color={colors.primary} />
-      </CircleButton> */
-}
-
-//   <RegularButton text="Save post" onPress={() => {}} />

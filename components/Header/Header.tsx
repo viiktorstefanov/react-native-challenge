@@ -1,14 +1,12 @@
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import colors from "@/constants/Colors"; 
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'react-native';
 
-type HeaderProps = {
-    isHomeView: boolean,
-}
+const Header : React.FC = () => {
 
-const Header : React.FC<HeaderProps> = ( { isHomeView}) => {
+    const [isHomeView, setIsHomeView] = useState(true);
 
   const [fontsLoaded] = useFonts({
     Inter: require('../../assets/fonts/Inter-Regular.ttf'),
