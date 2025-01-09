@@ -1,37 +1,61 @@
-import { View, Text, StyleSheet, StatusBar } from "react-native";
+import { View, Text, StyleSheet, StatusBar, Image, SafeAreaView, Dimensions } from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
+import { ApolloProvider, useQuery } from "@apollo/client";
+import { GET_ARTICLE_BY_ID } from "@/services/queries";
+import client from "@/services/apolloClient";
 
 const ArticleDetails = () => {
   const { id } = useLocalSearchParams();
+
+  const articleId = parseInt(id as string, 10);
+  
+  const { loading, error, data } = useQuery(GET_ARTICLE_BY_ID, {
+    variables: { id: articleId  },
+  });
+  
+  
+    if (loading) return <Text>Loading articles...</Text>;
+    if (error) return <Text>Error: {error.message}</Text>;
+
+    const article = data.articles_by_pk;
 
   return (
     <>
       <StatusBar
         translucent
-        barStyle={"dark-content"}
-        backgroundColor={"transparent"}
+        barStyle={"light-content"}
+        backgroundColor="transparent"
       />
       <View style={styles.container}>
-        <Text style={styles.title}>{id}</Text>
-        <Text style={styles.body}>test</Text>
+        <Image source={{ uri: article.image_url }} style={styles.articleImage} />
       </View>
     </>
   );
 };
 
+const ApolloApp = () => {
+  return (
+    <ApolloProvider client={client}>
+      <ArticleDetails />
+    </ApolloProvider>
+  );
+};
+
+const { width } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    flex: 1,
+    marginTop: 0, 
+    justifyContent: 'flex-start', 
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  body: {
-    fontSize: 16,
+  articleImage: {
+    width: width,  
+    height: 478,   
+    borderRadius: 0,  
+    resizeMode: 'cover', 
   },
 });
 
-export default ArticleDetails;
+export default ApolloApp;

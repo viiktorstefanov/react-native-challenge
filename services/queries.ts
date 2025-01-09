@@ -14,11 +14,13 @@ export const GET_ARTICLES = gql`
 `;
 
 export const GET_ARTICLE_BY_ID = gql`
-  query GetArticleById($id: Int!) {
+  query GetArticleByPk($id: Int!) {
     articles_by_pk(id: $id) {
       id
       title
+      image_url
       body
     }
   }
 `;
+
